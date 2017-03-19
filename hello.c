@@ -14,13 +14,13 @@ int main()
 {
 		char buf[BUF_SIZE] = "";
 		int res = 0;
-		
+
 
     	void *handle = dlopen ("libhello.so", RTLD_LAZY); 
     	if (handle == 0)
     	{
     		printf("Didn't open the library libhello.so\n");
-    		return -1;
+    		return ERROR;
     	}
 
 		int (*func)(char*, int) = dlsym (handle, "getHello"); 
@@ -28,7 +28,7 @@ int main()
 		if (res != OK) 
 		{
 				printf("getHello ERROR!\n");
-				return -1;
+				return ERROR;
 		}
 		printf("%s", buf);
 
@@ -36,8 +36,14 @@ int main()
 		handle = NULL;
 		func = NULL;
 
-		
-		printf("Goodbye world\n");
+
+		res = getGoodbye(buf, BUF_SIZE);
+		if (res != OK) 
+		{
+				printf("getGoodbye ERROR!\n");
+				return ERROR;
+		}
+		printf("%s", buf);
 
 
 		return 0;

@@ -6,6 +6,7 @@ BINARY_DIR = bin
 LIBS_DIR = libs
 TARGET_OBJ = $(OBJ_DIR)/hello.o
 SH_LIBS_OBJ = $(OBJ_DIR)/libhello.o
+ST_LIBS_OBJ = $(OBJ_DIR)/libgoodbye.o
 
 all : $(TARGET)
 
@@ -13,7 +14,7 @@ $(TARGET) :
 		@make libs
 		@make $(TARGET_OBJ)
 		@mkdir -p $(BINARY_DIR)
-		$(CC) -o $(BINARY_DIR)/$(BINARY_NAME) $(TARGET_OBJ) -ldl
+		$(CC) -o $(BINARY_DIR)/$(BINARY_NAME) $(TARGET_OBJ) $(LIBS_DIR)/libgoodbye.a -ldl
 
 $(TARGET_OBJ) : $(OBJ_DIR)/%.o : %.c
 		$(CC) -c -o $@ $<
@@ -23,9 +24,15 @@ libs :
 		@make $(SH_LIBS_OBJ)
 		@mkdir -p $(LIBS_DIR)
 		$(CC) -shared -o $(LIBS_DIR)/libhello.so $(SH_LIBS_OBJ) -lc
+		@make $(ST_LIBS_OBJ)
+		ar rcs $(LIBS_DIR)/libgoodbye.a $(ST_LIBS_OBJ)
+
 
 $(SH_LIBS_OBJ) : $(OBJ_DIR)/%.o : %.c
 		$(CC) -c -fPIC -o $@ $< 
+
+$(ST_LIBS_OBJ) : $(OBJ_DIR)/%.o : %.c
+		$(CC) -c -o $@ $< 		
 
 clean :
 		rm -rf $(OBJ_DIR) $(BINARY_DIR) $(LIBS_DIR)

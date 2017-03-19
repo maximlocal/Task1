@@ -33,5 +33,6 @@
 *.su
 
 # Directories
-bin/
-obj/
+./bin/
+./obj/
+./libs/
