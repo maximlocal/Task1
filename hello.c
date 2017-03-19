@@ -3,7 +3,6 @@
  */
 
 #include <stdio.h>
-#include <dlfcn.h>
 
 #define OK 0
 #define ERROR -1
@@ -16,15 +15,7 @@ int main()
 		int res = 0;
 
 
-    	void *handle = dlopen ("libhello.so", RTLD_LAZY); 
-    	if (handle == 0)
-    	{
-    		printf("Didn't open the library libhello.so\n");
-    		return ERROR;
-    	}
-
-		int (*func)(char*, int) = dlsym (handle, "getHello"); 
-		res = (*func)(buf, BUF_SIZE);
+		res = getHello(buf, BUF_SIZE);
 		if (res != OK) 
 		{
 				printf("getHello ERROR!\n");
@@ -32,12 +23,8 @@ int main()
 		}
 		printf("%s", buf);
 
-		dlclose (handle); 
-		handle = NULL;
-		func = NULL;
 
-
-		res = getGoodbye(buf, BUF_SIZE);
+ 		res = getGoodbye(buf, BUF_SIZE);
 		if (res != OK) 
 		{
 				printf("getGoodbye ERROR!\n");
