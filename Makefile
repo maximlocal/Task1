@@ -14,7 +14,7 @@ $(TARGET) :
 		@make libs
 		@make $(TARGET_OBJ)
 		@mkdir -p $(BINARY_DIR)
-		$(CC) -o $(BINARY_DIR)/$(BINARY_NAME) $(TARGET_OBJ) $(LIBS_DIR)/libgoodbye.a -ldl
+		$(CC) -o $(BINARY_DIR)/$(BINARY_NAME) $(TARGET_OBJ) -L$(LIBS_DIR) -ldl -lhello -lgoodbye
 
 $(TARGET_OBJ) : $(OBJ_DIR)/%.o : %.c
 		$(CC) -c -o $@ $<
