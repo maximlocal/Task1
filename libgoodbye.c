@@ -2,6 +2,9 @@
  * libgoodbye.c
  */
 
+#include <string.h>
+#include "libgoodbye.h"
+
 int getGoodbye(char *buf, const int bufSize)
 {		
 		const char str[] = "Goodbye World!\n";

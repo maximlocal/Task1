@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <dlfcn.h>
 
+#include "libhello.h"
+#include "libgoodbye.h"
+
 #define OK 0
 #define ERROR -1
 

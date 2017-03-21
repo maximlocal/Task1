@@ -1,6 +1,8 @@
 /*
  * libhello.c
  */
+#include <string.h>
+#include "libhello.h"
 
 int getHello(char *buf, const int bufSize)
 {		
