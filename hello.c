@@ -4,6 +4,9 @@
 
 #include <stdio.h>
 
+#include "libhello.h"
+#include "libgoodbye.h"
+
 #define OK 0
 #define ERROR -1
 
@@ -33,5 +36,5 @@ int main()
 		printf("%s", buf);
 
 
-		return 0;
+		return OK;
 }

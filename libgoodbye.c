@@ -2,6 +2,9 @@
  * libgoodbye.c
  */
 
+#include <string.h>
+#include "libgoodbye.h"
+
 int getGoodbye(char *buf, const int bufSize)
 {		
 		const char str[] = "Goodbye World!\n";
@@ -10,8 +13,7 @@ int getGoodbye(char *buf, const int bufSize)
 		if ((!buf) || (bufSize < strSize))
 				return -1;
 
-		for(int i = 0; i < strSize; ++i)
-				buf[i] = str[i];
+		strcpy(buf, str);
 
 		return 0;
 }	
